@@ -13,4 +13,11 @@ class Bureaucrat {
 	Bureaucrat &operator=(Bureaucrat &t);
 	~Bureaucrat();
 
+	void GradeTooHighException();
+	void GradeTooLowException();
+	int	grade();
+	const std::string getName();
+	int getGrade();
+	void	increaseGrade();
+	void	descreaseGrade();
 };
