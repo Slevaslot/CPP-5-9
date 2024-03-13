@@ -1,17 +1,17 @@
-#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-Bureaucrat::Bureaucrat() : _name ("default")
+Form::Form() : _name ("default")
 {
 	std::cout << "Please add a grade to " << this->_name << std::endl;
 	this->_grade = 42;
 }
 
-Bureaucrat::~Bureaucrat()
+Form::~Form()
 {
 
 }
 
-Bureaucrat::Bureaucrat(const std::string name, int grade) : _name (name)
+Form::Form(const std::string name, int grade) : _name (name)
 {
 	if (grade > 150)
 		this->GradeTooLowException();
@@ -21,21 +21,21 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _name (name)
 		this->_grade = grade;
 }
 
-Bureaucrat &Bureaucrat::operator=(Bureaucrat &t)
+Form &Form::operator=(Form &t)
 {
 	this->_grade = t._grade;
 	(std::string)this->_name = t._name;
 	return (*this);
 }
 
-std::ostream& operator<<(std::ostream &os, Bureaucrat &t)
+std::ostream& operator<<(std::ostream &os, Form &t)
 {
 	// os = NULL;
 	os << t.getName() << " is "<< t.getGrade() << "/150" << std::endl;
 	return os;
 }
 
-int	Bureaucrat::grade()
+int	Form::grade()
 {
 	if (this->_grade > 150)
 	{
@@ -50,37 +50,48 @@ int	Bureaucrat::grade()
 	return (this->_grade);
 }
 
-void Bureaucrat::GradeTooHighException()
+void Form::GradeTooHighException()
 {
 	std::cout << "Grade is too high !" << std::endl;
 }
 
-void Bureaucrat::GradeTooLowException()
+void Form::GradeTooLowException()
 {
 	std::cout << "Grade is too low !" << std::endl;
 }
 
-const std::string Bureaucrat::getName()
+const std::string Form::getName()
 {
 	return (this->_name);
 }
 
-int Bureaucrat::getGrade()
+int Form::getGrade()
 {
 	return (this->_grade);
 }
 
-void	Bureaucrat::increaseGrade()
+void	Form::increaseGrade()
 {
 	if (this->grade() == -1)
 		return ;
 	--this->_grade;
 }
 
-void	Bureaucrat::descreaseGrade()
+void	Form::descreaseGrade()
 {
 	if (this->grade() == -1)
 		return ;
 	++this->_grade;
 }
 
+void Form::beSigned(Bureaucrat &b)
+{
+	if (b.getGrade() <= this->_req)
+	{
+		if (b.getGrade() <= 0)
+			b.grade();
+		this->_sign = 1;
+	}
+	else
+		this->_sign = 0;
+}
