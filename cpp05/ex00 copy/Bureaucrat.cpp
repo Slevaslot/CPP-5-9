@@ -84,3 +84,14 @@ void	Bureaucrat::descreaseGrade()
 	++this->_grade;
 }
 
+void	Bureaucrat::signForm(Form &f)
+{
+	if (f.getSign() == 1)
+		std::cout << this->getName() << " signed " << f.getName() << std::endl;
+	else
+	{
+		std::cout << this->getName() << "couldn’t sign" << f.getName() << "because ";
+		this->grade();
+	}
+
+}

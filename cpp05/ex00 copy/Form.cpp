@@ -1,9 +1,8 @@
-#include "Form.hpp"
+#include "Bureaucrat.hpp"
 
-Form::Form() : _name ("default")
+Form::Form() : _name ("default"), _exec(42)
 {
-	std::cout << "Please add a grade to " << this->_name << std::endl;
-	this->_grade = 42;
+
 }
 
 Form::~Form()
@@ -11,19 +10,19 @@ Form::~Form()
 
 }
 
-Form::Form(const std::string name, int grade) : _name (name)
+Form::Form(const std::string name, const int req, const int exec) : _name (name), _exec(exec), _req(req)
 {
-	if (grade > 150)
+	if (req > 150 || exec > 150)
 		this->GradeTooLowException();
-	else if (grade < 1)
+	else if (exec < 1 || req < 1)
 		this->GradeTooHighException();
 	else
-		this->_grade = grade;
+		_sign = 0;
 }
 
 Form &Form::operator=(Form &t)
 {
-	this->_grade = t._grade;
+	this->_sign = t._sign;
 	(std::string)this->_name = t._name;
 	return (*this);
 }
@@ -31,33 +30,33 @@ Form &Form::operator=(Form &t)
 std::ostream& operator<<(std::ostream &os, Form &t)
 {
 	// os = NULL;
-	os << t.getName() << " is "<< t.getGrade() << "/150" << std::endl;
+	os << t.getName() << " Current sign "<< t.getSign() << "1 : can be signed" << "0 : cant be signed" << " requiered : " << t.getReq() << " grade exec : " << t.getExec() << std::endl;
 	return os;
 }
 
 int	Form::grade()
 {
-	if (this->_grade > 150)
+	if (this->_exec > 150)
 	{
 		this->GradeTooLowException();
 		return (-1);
 	}
-	else if (this->_grade < 1)
+	else if (this->_exec < 1)
 	{
 		this->GradeTooHighException();
 		return (-1);
 	}
-	return (this->_grade);
+	return (this->_exec);
 }
 
 void Form::GradeTooHighException()
 {
-	std::cout << "Grade is too high !" << std::endl;
+	std::cout << "Form's grade is too high !" << std::endl;
 }
 
 void Form::GradeTooLowException()
 {
-	std::cout << "Grade is too low !" << std::endl;
+	std::cout << "Form's is too low !" << std::endl;
 }
 
 const std::string Form::getName()
@@ -65,33 +64,29 @@ const std::string Form::getName()
 	return (this->_name);
 }
 
-int Form::getGrade()
+int Form::getSign()
 {
-	return (this->_grade);
+	return (this->_sign);
 }
 
-void	Form::increaseGrade()
+int Form::getExec()
 {
-	if (this->grade() == -1)
-		return ;
-	--this->_grade;
+	return (this->_exec);
 }
 
-void	Form::descreaseGrade()
+int Form::getReq()
 {
-	if (this->grade() == -1)
-		return ;
-	++this->_grade;
+	return (this->_req);
 }
+
 
 void Form::beSigned(Bureaucrat &b)
 {
-	if (b.getGrade() <= this->_req)
-	{
-		if (b.getGrade() <= 0)
-			b.grade();
+	if (b.getGrade() <= this->_req && b.getGrade() > 0)
 		this->_sign = 1;
-	}
 	else
+	{
+		b.grade();
 		this->_sign = 0;
+	}
 }

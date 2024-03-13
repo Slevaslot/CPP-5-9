@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <new>
+#include "Form.hpp"
 
 class Bureaucrat {
 	protected:
@@ -20,6 +21,7 @@ class Bureaucrat {
 	int getGrade();
 	void	increaseGrade();
 	void	descreaseGrade();
+	void	signForm(Form &f);
 };
 
 std::ostream& operator<<(std::ostream &os, Bureaucrat &t);
