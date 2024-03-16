@@ -18,7 +18,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm &t)
 
 void RobotomyRequestForm::function() const
 {
-  srand(time(NULL));
+	srand(time(NULL));
 	int test = std::rand();
 	std::cout << test << std::endl;
 	if ((test % 2) == 0)
