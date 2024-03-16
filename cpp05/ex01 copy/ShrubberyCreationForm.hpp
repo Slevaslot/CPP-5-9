@@ -1,4 +1,4 @@
-#include "Bureaucrat.hpp"
+#include "RobotomyRequestForm.hpp"
 #include <fstream>
 class ShrubberyCreationForm : public AForm
 {

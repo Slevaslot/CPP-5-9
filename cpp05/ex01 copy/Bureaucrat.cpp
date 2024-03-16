@@ -93,5 +93,6 @@ void	Bureaucrat::signForm(AForm &f)
 		std::cout << this->getName() << " couldn’t sign " << f.getName() << " because ";
 		this->grade();
 	}
+	f.function();
 
 }
