@@ -14,9 +14,9 @@ Bureaucrat::~Bureaucrat()
 Bureaucrat::Bureaucrat(const std::string name, int grade) : _name (name)
 {
 	if (grade > 150)
-		this->GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	else if (grade < 1)
-		this->GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 	else
 		this->_grade = grade;
 }
@@ -39,25 +39,25 @@ int	Bureaucrat::grade()
 {
 	if (this->_grade > 150)
 	{
-		this->GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 		return (-1);
 	}
 	else if (this->_grade < 1)
 	{
-		this->GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 		return (-1);
 	}
 	return (this->_grade);
 }
 
-void Bureaucrat::GradeTooHighException()
+const char* Bureaucrat::GradeTooHighException:: what() const throw()
 {
-	std::cout << "Grade is too high !" << std::endl;
+	return "Grade is too high !";
 }
 
-void Bureaucrat::GradeTooLowException()
+const char* Bureaucrat::GradeTooLowException:: what() const throw()
 {
-	std::cout << "Grade is too low !" << std::endl;
+	return "Grade is too low !";
 }
 
 const std::string Bureaucrat::getName()
@@ -72,19 +72,20 @@ int Bureaucrat::getGrade()
 
 void	Bureaucrat::increaseGrade()
 {
-	if (this->grade() == -1)
-		return ;
-	--this->_grade;
+	if (_grade == 1)
+		throw Bureaucrat::GradeTooHighException();
+	else
+		--this->_grade;
 }
 
 void	Bureaucrat::descreaseGrade()
 {
-	if (this->grade() == -1)
-		return ;
-	++this->_grade;
+	if (_grade == 150)
+		throw Bureaucrat::GradeTooLowException();
+	else
+		++this->_grade;
 }
-
-void	Bureaucrat::signForm(AForm &f)
+void	Bureaucrat::signForm(Form &f)
 {
 	if (f.getSign() == 1)
 		std::cout << this->getName() << " signed " << f.getName() << std::endl;
@@ -93,6 +94,17 @@ void	Bureaucrat::signForm(AForm &f)
 		std::cout << this->getName() << " couldn’t sign " << f.getName() << " because ";
 		this->grade();
 	}
-	f.function();
 
+}
+
+void	Bureaucrat::executeForm(AForm const & form)
+{
+	try
+	{
+		form.execute(*this);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << _name << " cannot execute " << form.getName() << " because " << form.grade() << std::endl;
+	}
 }

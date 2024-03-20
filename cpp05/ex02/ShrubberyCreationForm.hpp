@@ -10,4 +10,5 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm &operator=(ShrubberyCreationForm &t);
 		~ShrubberyCreationForm();
 		void	function() const;
+		int	grade();
 };

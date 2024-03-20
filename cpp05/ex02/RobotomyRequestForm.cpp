@@ -1,11 +1,11 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 25, 5)
+RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45)
 {
 	_target = "default";
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotomyRequestForm", 25, 5)
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotomyRequestForm", 72, 45)
 {
 	_target = target;
 }
@@ -25,5 +25,20 @@ void RobotomyRequestForm::function() const
 		std::cout << _target << " has been robotomized" << std::endl;
 	else
 		std::cout << "Robotomized failed on " << _target << std::endl;
+}
+
+int	RobotomyRequestForm::grade()
+{
+	if (this->getExec() < 45)
+	{
+		this->GradeTooHighException();
+		return (-1);
+	}
+	else if (this->getReq()> 72)
+	{
+		this->GradeTooLowException();
+		return (-1);
+	}
+	return (this->getExec());
 }
 

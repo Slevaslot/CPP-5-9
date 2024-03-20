@@ -16,8 +16,14 @@ class AForm {
 	AForm &operator=(AForm &t);
 	~AForm();
 
-	void GradeTooHighException();
-	void GradeTooLowException();
+	        class GradeTooLowException: public std::exception {
+            public :
+                virtual const char *retThrow() const throw();
+        };
+        class GradeTooHighException: public std::exception {
+            public :
+                virtual const char* retThrow() const throw();
+        };
 	int	grade();
 	const std::string getName();
 	int getSign();
@@ -25,6 +31,8 @@ class AForm {
 	int getExec();
 	virtual void	function() const = 0;
 	int getReq();
+	void execute(Bureaucrat const & executor);
+
 };
 
 std::ostream& operator<<(std::ostream &os, AForm &t);

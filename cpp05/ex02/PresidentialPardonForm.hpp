@@ -10,4 +10,5 @@ class PresidentialPardonForm : public AForm
 		PresidentialPardonForm &operator=(PresidentialPardonForm &t);
 		~PresidentialPardonForm();
 		void	function() const;
+		int	grade();
 };

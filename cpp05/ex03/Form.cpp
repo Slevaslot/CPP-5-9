@@ -10,6 +10,13 @@ AForm::~AForm()
 
 }
 
+void AForm::execute(Bureaucrat const & executor)
+{
+	if (_sign == 0)
+		std::cout << "Form " << this->_name << "is not signed" << std::endl;
+	if (executor.getGrade())
+}
+
 AForm::AForm(const std::string name, const int req, const int exec) : _name (name), _req(req), _exec(exec)
 {
 	if (req > 150 || exec > 150)

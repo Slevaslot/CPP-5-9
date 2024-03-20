@@ -13,4 +13,6 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm &operator=(RobotomyRequestForm &t);
 		~RobotomyRequestForm();
 		void	function() const;
+		int	grade();
+
 };

@@ -1,4 +1,4 @@
-#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Form::Form() : _name ("default"),  _req(42), _exec(42)
 {
@@ -13,9 +13,9 @@ Form::~Form()
 Form::Form(const std::string name, const int req, const int exec) : _name (name), _req(req), _exec(exec)
 {
 	if (req > 150 || exec > 150)
-		this->GradeTooLowException();
+		throw Form::GradeTooLowException();
 	else if (exec < 1 || req < 1)
-		this->GradeTooHighException();
+		throw Form::GradeTooHighException();
 	else
 		_sign = 0;
 }
@@ -36,27 +36,27 @@ std::ostream& operator<<(std::ostream &os, Form &t)
 
 int	Form::grade()
 {
-	if (this->_exec > 150)
+	if (this->_req > 150 || this->_exec > 150)
 	{
-		this->GradeTooLowException();
+		throw Form::GradeTooLowException();
 		return (-1);
 	}
-	else if (this->_exec < 1)
+	else if (this->_req < 1 || this->_exec < 1)
 	{
-		this->GradeTooHighException();
+		throw Form::GradeTooHighException();
 		return (-1);
 	}
-	return (this->_exec);
+	return (this->_req);
 }
 
-void Form::GradeTooHighException()
+const char* Form::GradeTooHighException:: what() const throw()
 {
-	std::cout << "Form's grade is too high !" << std::endl;
+	return "Form Grade is too high !";
 }
 
-void Form::GradeTooLowException()
+const char* Form::GradeTooLowException:: what() const throw()
 {
-	std::cout << "Form's is too low !" << std::endl;
+	return "Form Grade is too low !";
 }
 
 const std::string Form::getName()
@@ -86,7 +86,8 @@ void Form::beSigned(Bureaucrat &b)
 		this->_sign = 1;
 	else
 	{
-		b.grade();
+		std::cout << b.getName() << " cant sign " << this->getName() << " because his grade is " << b.getGrade() << " and the required grade is " << this->getReq() << std::endl;
+		throw Form::GradeTooHighException();
 		this->_sign = 0;
 	}
 }
