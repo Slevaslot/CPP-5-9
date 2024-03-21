@@ -20,7 +20,6 @@ void RobotomyRequestForm::function() const
 {
 	srand(time(NULL));
 	int test = std::rand();
-	std::cout << test << std::endl;
 	if ((test % 2) == 0)
 		std::cout << _target << " has been robotomized" << std::endl;
 	else
@@ -31,12 +30,12 @@ int	RobotomyRequestForm::grade()
 {
 	if (this->getExec() < 45)
 	{
-		this->GradeTooHighException();
+		throw RobotomyRequestForm::GradeTooHighException();
 		return (-1);
 	}
 	else if (this->getReq()> 72)
 	{
-		this->GradeTooLowException();
+		throw RobotomyRequestForm::GradeTooLowException();
 		return (-1);
 	}
 	return (this->getExec());

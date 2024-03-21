@@ -1,4 +1,7 @@
-#include "RobotomyRequestForm.hpp"
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
+
+#include "AForm.hpp"
 #include <fstream>
 class ShrubberyCreationForm : public AForm
 {
@@ -12,3 +15,5 @@ class ShrubberyCreationForm : public AForm
 		void	function() const;
 		int	grade();
 };
+
+#endif

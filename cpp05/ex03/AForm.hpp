@@ -1,8 +1,13 @@
+# ifndef AFORM_HPP
+#define AFORM_HPP
+
+
 #include <iostream>
 #include <string>
 #include <new>
-// #include "Bureaucrat.hpp"
+#include "Bureaucrat.hpp"
 class Bureaucrat;
+
 class AForm {
 	private:
 	const std::string _name;
@@ -18,22 +23,23 @@ class AForm {
 
 	        class GradeTooLowException: public std::exception {
             public :
-                virtual const char *retThrow() const throw();
+                virtual const char *what() const throw();
         };
         class GradeTooHighException: public std::exception {
             public :
-                virtual const char* retThrow() const throw();
+                virtual const char *what() const throw();
         };
 	int	grade();
-	const std::string getName();
+	const std::string getName() const;
 	int getSign();
 	void beSigned(Bureaucrat &b);
 	int getExec();
 	virtual void	function() const = 0;
 	int getReq();
-	void execute(Bureaucrat const & executor);
-
+	void execute(Bureaucrat const & executor) const;
 };
 
 std::ostream& operator<<(std::ostream &os, AForm &t);
+
+#endif
 

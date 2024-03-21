@@ -59,7 +59,7 @@ const char* AForm::GradeTooLowException:: what() const throw()
 	return "AForm Grade is too low !";
 }
 
-const std::string AForm::getName()
+const std::string AForm::getName() const
 {
 	return (this->_name);
 }
@@ -92,7 +92,7 @@ void AForm::beSigned(Bureaucrat &b)
 	}
 }
 
-void AForm::execute(Bureaucrat const & executor)
+void AForm::execute(Bureaucrat const & executor) const
 {
 	if (_sign == 0)
 		std::cout << "AForm " << this->_name << "is not signed" << std::endl;

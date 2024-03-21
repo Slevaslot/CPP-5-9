@@ -21,3 +21,17 @@ void PresidentialPardonForm::function() const
 	std::cout << _target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 
+int	PresidentialPardonForm::grade()
+{
+	if (this->getExec() < 5)
+	{
+		throw PresidentialPardonForm::GradeTooHighException();
+		return (-1);
+	}
+	else if (getReq()> 25)
+	{
+		throw PresidentialPardonForm::GradeTooLowException();
+		return (-1);
+	}
+	return (this->getExec());
+}

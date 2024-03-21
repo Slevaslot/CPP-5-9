@@ -43,3 +43,17 @@ void ShrubberyCreationForm::function() const
 	fs.close();
 }
 
+int	ShrubberyCreationForm::grade()
+{
+	if (this->getExec() < 137)
+	{
+		throw ShrubberyCreationForm::GradeTooHighException();
+		return (-1);
+	}
+	else if (this->getReq() > 145)
+	{
+		throw ShrubberyCreationForm::GradeTooLowException();
+		return (-1);
+	}
+	return (this->getExec());
+}

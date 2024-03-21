@@ -1,4 +1,7 @@
-#include "ShrubberyCreationForm.hpp"
+#ifndef PRESIDENTIALPARDONFORM_HPP
+#define PRESIDENTIALPARDONFORM_HPP
+
+#include "AForm.hpp"
 #include <fstream>
 class PresidentialPardonForm : public AForm
 {
@@ -10,4 +13,7 @@ class PresidentialPardonForm : public AForm
 		PresidentialPardonForm &operator=(PresidentialPardonForm &t);
 		~PresidentialPardonForm();
 		void	function() const;
+		int	grade();
 };
+
+#endif

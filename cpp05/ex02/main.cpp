@@ -1,4 +1,6 @@
 #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 int main ()
 {
    Bureaucrat test("test", 4);
@@ -12,7 +14,22 @@ int main ()
     testform->beSigned(test);
     test.signForm(*testform);
     test.signForm(*testform1);
-    Bureaucrat test1("hey", 4);
-    std::cout << test1 << std::endl;
+    try
+    {
+        {/* code */
+            test.executeForm(*testform);
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try {
+    Bureaucrat test1("hey", -2);
+    }
+    catch(const std::exception& e){
+        std::cerr << e.what() << '\n';
+    }
+    // std::cout << test1 << std::endl;
     std::cout << test.getName() << std::endl;
 }

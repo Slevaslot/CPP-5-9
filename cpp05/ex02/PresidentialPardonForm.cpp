@@ -25,12 +25,12 @@ int	PresidentialPardonForm::grade()
 {
 	if (this->getExec() < 5)
 	{
-		this->GradeTooHighException();
+		throw PresidentialPardonForm::GradeTooHighException();
 		return (-1);
 	}
 	else if (getReq()> 25)
 	{
-		this->GradeTooLowException();
+		throw PresidentialPardonForm::GradeTooLowException();
 		return (-1);
 	}
 	return (this->getExec());
