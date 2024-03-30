@@ -63,9 +63,13 @@ void Span::addNumber(int n)
 	_n.push_back(n);
 }
 
-void Span::addNumber(int begin, int end)
+void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	
+	unsigned int i = 0;
+	if (_max == 0 || _n.size() == _max || end < begin)
+		throw std::length_error ("error : number reach max of the array");
+	while (begin++ < end)
+		_n.push_back(++i);
 }
 
 void Span::shortestSpan()

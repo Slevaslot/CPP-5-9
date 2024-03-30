@@ -32,4 +32,14 @@ int main()
 	{
 		std::cout << e.what() << std::endl;
 	}
+	Span sp1 = Span(10);
+	std::vector<int> v(5, 0);
+	try {
+		sp1.addNumber(v.begin(), v.end());
+		sp1.shortestSpan();
+		sp1.longestSpan();
+	}
+	catch (std::exception &e){
+		std::cout << e.what() << std::endl;
+	}
 }
