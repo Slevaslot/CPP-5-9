@@ -2,15 +2,18 @@ SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-CC = c++ -Wall -Wextra -Werror -std=c++98
-NAME = Iter
+CC = c++ -g -Wall -Wextra -Werror -std=c++98
+NAME = easyFind
 
 all:		$(NAME)
 
 $(NAME):	$(SRC)
 			$(CC) -o $(NAME) $(SRC)
 
+clean:
+	rm -f $(OBJ)
+
 fclean:
-	rm $(NAME)
+	rm -f $(OBJ) $(NAME)
 
 re: fclean all
