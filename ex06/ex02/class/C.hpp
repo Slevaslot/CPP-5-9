@@ -5,7 +5,6 @@
 
 class C : public Base
 {
-
 };
 
 

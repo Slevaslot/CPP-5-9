@@ -14,10 +14,10 @@ class Serializer
 		Serializer();
 		Serializer(const Serializer &t);
 		Serializer &operator=(const Serializer &t);
-		virtual ~Serializer();
+		virtual ~Serializer() = 0;
 
-		uintptr_t serialize(Data* ptr);
-		Data* deserialize(uintptr_t raw);
+		uintptr_t static serialize(Data* ptr);
+		static Data* deserialize(uintptr_t raw);
 };
 
 #endif

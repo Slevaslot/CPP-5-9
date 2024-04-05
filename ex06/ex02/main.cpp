@@ -3,6 +3,7 @@
 #include "class/B.hpp"
 #include "class/C.hpp"
 #include <stdexcept>
+// #include <unistd.h>
 
 Base *generate()
 {
@@ -29,19 +30,19 @@ void identify(Base* p)
 void identify(Base& p)
 {
 	try {
-		dynamic_cast<A&>(p);
+		A test = dynamic_cast<A&>(p);
 		std::cout << "A" << std::endl;
 	}
 	catch (std::exception &e) {
 	}
 	try {
-		dynamic_cast<B&>(p);
+		B test = dynamic_cast<B&>(p);
 		std::cout << "B" << std::endl;
 	}
 	catch (std::exception &e) {
 	}
 	try {
-		dynamic_cast<C&>(p);
+		C test = dynamic_cast<C&>(p);
 		std::cout << "C" << std::endl;
 	}
 	catch (std::exception &e) {
