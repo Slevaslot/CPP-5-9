@@ -1,4 +1,4 @@
-SRC = ScalarConverter.cpp main.cpp
+SRC = ScalarConverter.cpp main.cpp ft/converter.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
