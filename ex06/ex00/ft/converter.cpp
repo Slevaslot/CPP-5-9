@@ -27,7 +27,7 @@ int	strisdigit(char * input)
 
 int	is_double(double n)
 {
-	int i = (int)n;//add static cast
+	int i = static_cast<int>(n);
 	if (n == 0)
 		return (1);
 	if (fmod(n,static_cast<double>(i)))
@@ -93,7 +93,7 @@ int		for_char(std::string input)
 int	for_digit(std::string input, char *c_strr, const char *c_str, int *ci)
 {
 	if (input[input.length() - 1] == 'f' && input.length() != 1)
-	c_strr[input.length() - 1] = 0;
+		c_strr[input.length() - 1] = 0;
 	double digit = strtod(c_str, NULL);
 	if (*ci == 0)
 	{
@@ -110,7 +110,7 @@ int	for_digit(std::string input, char *c_strr, const char *c_str, int *ci)
 	if (*ci == 0)
 		std::cout << "char: impossible" << std::endl;
 	std::cout << "int: " << static_cast<int>(digit) << std::endl;
-	std::cout << "double: " << input;
+	std::cout << "double: " << digit;
 	if (is_double(digit))
 		std::cout << ".0";
 	std::cout << std::endl;

@@ -37,6 +37,9 @@ void ScalarConverter::convert(std::string input)
 			case 'D':
 				for_digit(input, c_strr, c_str, &ci);
 				break;
+			case 'F':
+				for_digit(input, c_strr, c_str, &ci);
+				break;
 			case 'N':
 				if (ci == 0)
 					None();
