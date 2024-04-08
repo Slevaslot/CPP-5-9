@@ -4,6 +4,7 @@ int	strisdigit(char * input)
 {
 	size_t i = 0;
 	int nbrvir = 0;
+
 	if (input[i] == '-' || input[i] == '+')
 		i++;
 	while (input[i])
