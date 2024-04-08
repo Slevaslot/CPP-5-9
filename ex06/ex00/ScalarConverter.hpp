@@ -24,4 +24,5 @@ char	which_type(std::string, char *c_strr);
 int		for_char(std::string input);
 int	for_digit(std::string input, char *c_strr, const char *c_str, int *ci);
 void	None();
+
 #endif
