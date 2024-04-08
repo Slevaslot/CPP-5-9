@@ -76,7 +76,7 @@ int		for_char(std::string input)
 {
 	if (input[0] >= '0' && input[0] <= '9')
 	{
-			 std::cout << "char: Non displayable" << std::endl;
+		std::cout << "char: Non displayable" << std::endl;
 		return (1);
 	}
 	else
