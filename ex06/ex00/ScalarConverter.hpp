@@ -6,6 +6,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <math.h>
+
 class ScalarConverter
 {
 	private:
