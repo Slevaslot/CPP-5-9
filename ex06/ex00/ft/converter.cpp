@@ -27,7 +27,7 @@ int	strisdigit(char * input)
 
 int	is_double(double n)
 {
-	int i = (int)n;
+	int i = (int)n;//add static cast
 	if (n == 0)
 		return (1);
 	if (fmod(n,static_cast<double>(i)))
