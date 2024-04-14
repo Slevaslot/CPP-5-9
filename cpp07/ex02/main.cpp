@@ -3,6 +3,12 @@
 int main()
 {
 	try {
+		Array<int> test(void);
+	}
+	catch (std::out_of_range &e){
+		std::cout << "IMPOSSIBLE TO CREATE" << std::endl;
+	}
+	try {
 		Array<int> test(16);
 		std::cout << test[2];
 		test[2] = 2;

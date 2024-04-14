@@ -10,7 +10,7 @@ class Array
 		T *_array;
 		unsigned int _size;
 	public :
-		Array(void)
+		Array()
 		{
 			_array = NULL;
 			_size = 0;
