@@ -10,7 +10,7 @@ int main()
 	}
 	try {
 		Array<int> test(16);
-		std::cout << test[2];
+		// std::cout << test[2];
 		test[2] = 2;
 		std::cout << test[2] << std::endl;
 	}
@@ -21,7 +21,7 @@ int main()
 		Array<int> test(16);
 		Array<int> test1;
 		test1 = test;
-		std::cout << test1[2];
+		// std::cout << test1[2];
 		test1[2] = 2;
 		std::cout << test1[2] << std::endl;
 		test1[17] = 17;
@@ -33,7 +33,7 @@ int main()
 		Array<int> test(16);
 		Array<int> test1(test);
 		test1[2] = 2;
-		std::cout << test[2] << std::endl;
+		// std::cout << test[2] << std::endl;
 	}
 	catch (std::out_of_range &e){
 		std::cout << e.what() << std::endl;

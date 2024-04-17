@@ -7,8 +7,8 @@ template <typename T>
 class Array
 {
 	private :
-		T *_array;
 		unsigned int _size;
+		T *_array;
 	public :
 		Array()
 		{
@@ -47,10 +47,16 @@ class Array
 		T &operator[](unsigned int n)
 		{
 				if (n <= _size)
-					return _array[n];
+				{
+						return _array[n];
+				}
 				else
 					throw std::out_of_range("-- This array is out of range! --");
 		}
+
+		~Array(){
+			delete [] _array;
+		};
 
 };
 
