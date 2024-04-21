@@ -1,9 +1,9 @@
-SRC = main.cpp BitcoinExchange.cpp
+SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
 CC = c++ -Wall -Wextra -Werror -std=c++98
-NAME = btc
+NAME = RPN
 
 all:		$(NAME)
 
