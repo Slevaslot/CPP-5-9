@@ -44,6 +44,8 @@ int evaluateRPN(const std::string& expression) {
             } else if (token == "*") {
                 operands.push(operand1 * operand2);
             } else if (token == "/") {
+                if (operand2 == 0)
+                    throw std::invalid_argument("can't divise by 0.");
                 operands.push(operand1 / operand2);
             }
         }
