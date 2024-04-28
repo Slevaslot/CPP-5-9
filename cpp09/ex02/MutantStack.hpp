@@ -1,9 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <cstdlib>
-#include <list>
-#include <deque>
+#ifndef MUTANTSTACK_HPP
+#define MUTANTSTACK_HPP
+
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -13,13 +10,10 @@
 #include <vector>
 #include <stack>
 #include <list>
-
-bool isInteger(char **tokens, int ac);
-
 template <typename T, typename Container = std::deque<T> >
-class MutantStack : public std::list<T> {
+class MutantStack : public std::stack<T> {
 public:
-	MutantStack() : MutantStack<T, Container>::list() {};
+	MutantStack() : MutantStack<T, Container>::stack() {};
 	MutantStack(const MutantStack<T, Container>& other) : MutantStack<T, Container>::stack(other) {};
 
     typedef typename Container::iterator iterator;
@@ -40,8 +34,6 @@ public:
     const_iterator end() const {
         return this->c.end();
     }
-    // int& operator[](int index) {
-    //     return ();
-    // }
 };
 
+#endif

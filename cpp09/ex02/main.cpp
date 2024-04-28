@@ -12,6 +12,7 @@ void insertionSort(T& arr, int left, int right) {
         }
         arr[j + 1] = key;
     }
+
 }
 
 template <typename T>
@@ -21,8 +22,6 @@ void merge(T& arr, int left, int mid, int right) {
     std::merge(arr.begin() + left, arr.begin() + mid + 1,
                arr.begin() + mid + 1, arr.begin() + right + 1,
                tempArr.begin());
-    for (size_t i = 0; i < arr.size(); ++i)
-        std::cout << arr[i] << " ";
     for (size_t i = 0; i < tempArr.size(); ++i) {
         arr[left + i] = tempArr[i];
     }
@@ -37,7 +36,7 @@ void mergeInsertionSort(T& arr, int left, int right, int threshold) {
             int mid = left + (right - left) / 2;
             mergeInsertionSort(arr, left, mid, threshold);
             mergeInsertionSort(arr, mid + 1, right, threshold);
-            //merge(arr, left, mid, right);
+            merge(arr, left, mid, right);
         }
     }
 }
@@ -49,10 +48,10 @@ int main(int argc, char *argv[])
 	if (!isInteger(argv, argc) || argc < 2)
 		return (std::cout << "Error: not a positive integer argument." << std::endl, 1);
 	std::vector<int> vector;
-	std::list<int> list;
+    std::deque<int> deque;
     for (int i = 1; i < argc; ++i) {
         vector.push_back(std::atoi(argv[i]));
-        list.push_back(std::atoi(argv[i]));
+        deque.push_back(std::atoi(argv[i]));
     }
     std::cout << "Array before sorting: ";
     for (std::vector<int>::size_type i = 0; i < vector.size(); ++i)
@@ -60,14 +59,17 @@ int main(int argc, char *argv[])
     std::cout << std::endl;
     clock_gettime(CLOCK_REALTIME, &ts);
     long double before = ts.tv_nsec;
-    std::cout << "Current time in microseconds: \n" << ts.tv_nsec;
     mergeInsertionSort(vector, 0, vector.size() - 1, 2);
-    mergeInsertionSort(list, 0, vector.size() - 1, 2);
     clock_gettime(CLOCK_REALTIME, &ts); 
-    std::cout << "Current time in microseconds: \n" << ts.tv_nsec - before;
+    std::cout << "Vector time: " << ts.tv_nsec - before << std::endl;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    before = ts.tv_nsec;
+    mergeInsertionSort(deque, 0, deque.size() - 1, 2);
+    clock_gettime(CLOCK_REALTIME, &ts); 
+    std::cout << "Deque time: " << ts.tv_nsec - before << std::endl;
     std::cout << "array after sorting: ";
     for (std::vector<int>::size_type i = 0; i < vector.size(); ++i)
-        std::cout << vector[i] << " ";
+        std::cout << deque[i] << " ";
     std::cout << std::endl;
 
     return 0;
