@@ -5,20 +5,19 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <list>
 
 template <typename T>
 
 int easyfind(T type, int nb)
 {
-	typename T::iterator tbegin = std::find(type.begin(), type.begin(), nb);
-	while (tbegin <= type.end())
+	typename T::iterator tbegin = type.begin();
+	for (*tbegin; tbegin != type.end(); tbegin++)
 	{
 		if (*tbegin == nb)
 			return (*tbegin);
-		++tbegin;
 	}
 	throw std::out_of_range("No occurence find");
-	// return (0);
 }
 
 #endif
