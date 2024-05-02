@@ -14,18 +14,24 @@ double calculate(std::stack<double> operands, std::stack<char> operators)
 {
     if (operators.size() + 1 != operands.size())
         throw (std::invalid_argument("error: wrong number of digit or operators"));
-    double operand2 = operands.top(); operands.pop();
     double operand1 = operands.top(); operands.pop();
-    if (operators.top() == '+') {
-        operands.push(operand1 + operand2);
-    } else if (operators.top() == '-') {
-        operands.push(operand1 - operand2);
-    } else if (operators.top() == '*') {
-        operands.push(operand1 * operand2);
-    } else if (operators.top() == '/') {
-        if (operand2 == 0)
-            throw std::invalid_argument("can't divise by 0.");
-        operands.push(operand1 / operand2);
+    while(!operands.empty())
+    {
+        double operand2 = operands.top(); operands.pop();
+        std::cout << "OP1: " << operand1 << "OP2: "<< operand2 << std::endl;
+        if (operators.top() == '+') {
+            operand1 = (operand1 + operand2);
+        } else if (operators.top() == '-') {
+            operand1 = (operand1 - operand2);
+        } else if (operators.top() == '*') {
+            operand1 = (operand1 * operand2);
+        } else if (operators.top() == '/') {
+            if (operand2 == 0)
+                throw std::invalid_argument("can't divise by 0.");
+            operand1 = (operand1 / operand2);
+        }
+        operands.push(operand1);
+        operators.pop();
     }
     return (operands.top());
 }
