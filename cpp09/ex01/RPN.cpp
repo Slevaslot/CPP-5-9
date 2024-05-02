@@ -10,19 +10,36 @@ bool isInteger(std::string token)
     int valeur = atoi(token.c_str());
     return (valeur < 10);
 }
+double calculate(std::stack<double> operands, std::stack<char> operators)
+{
+    if (operators.size() + 1 != operands.size())
+        throw (std::invalid_argument("error: wrong number of digit or operators"));
+    double operand2 = operands.top(); operands.pop();
+    double operand1 = operands.top(); operands.pop();
+    if (operators.top() == '+') {
+        operands.push(operand1 + operand2);
+    } else if (operators.top() == '-') {
+        operands.push(operand1 - operand2);
+    } else if (operators.top() == '*') {
+        operands.push(operand1 * operand2);
+    } else if (operators.top() == '/') {
+        if (operand2 == 0)
+            throw std::invalid_argument("can't divise by 0.");
+        operands.push(operand1 / operand2);
+    }
+    return (operands.top());
+}
 
 int evaluateRPN(const std::string& expression) {
     std::istringstream iss(expression);
     std::stack<double> operands;
+    std::stack<char> operators;
     std::string token;
-	int	numberOfOperator = 0;
-	int numberOfDigit = 0;
 
     while (iss >> token)
     {
         if (isInteger(token))
         {
-			numberOfDigit++;
             char* endptr;
             double value = strtod(token.c_str(), &endptr);
             if (*endptr == '\0') {
@@ -30,30 +47,9 @@ int evaluateRPN(const std::string& expression) {
             }
         }
         else if (token[0] == '*' || token[0] == '+' || token[0] == '-' || token[0] == '/')
-        {
-			numberOfOperator++;
-            if (operands.size() < 2)
-                throw std::invalid_argument("not enough digit to operate.");
-            double operand2 = operands.top(); operands.pop();
-            double operand1 = operands.top(); operands.pop();
-
-            if (token == "+") {
-                operands.push(operand1 + operand2);
-            } else if (token == "-") {
-                operands.push(operand1 - operand2);
-            } else if (token == "*") {
-                operands.push(operand1 * operand2);
-            } else if (token == "/") {
-                if (operand2 == 0)
-                    throw std::invalid_argument("can't divise by 0.");
-                operands.push(operand1 / operand2);
-            }
-        }
+            operators.push(token[0]);
         else
             throw std::invalid_argument("invalid argument.");
     }
-    if (numberOfOperator + 1 == numberOfDigit)
-        return operands.top();
-    else
-        throw std::invalid_argument("not enough operator to operate.");
+    return (calculate(operands, operators));
 }

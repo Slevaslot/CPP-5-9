@@ -2,7 +2,7 @@ SRC = main.cpp RPN.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-CC = c++ -Wall -Wextra -Werror -std=c++98
+CC = c++ -g -Wall -Wextra -Werror -std=c++98
 NAME = RPN
 
 all:		$(NAME)
