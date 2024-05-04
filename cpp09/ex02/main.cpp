@@ -54,22 +54,23 @@ int main(int argc, char *argv[])
         deque.push_back(std::atoi(argv[i]));
     }
     std::cout << "Array before sorting: ";
-    for (std::vector<int>::size_type i = 0; i < vector.size(); ++i)
+    for (std::vector<int>::size_type i = 0; i < 5; ++i)
         std::cout << vector[i] << " ";
-    std::cout << std::endl;
+    std::cout << "[..]" << std::endl;
     clock_gettime(CLOCK_REALTIME, &ts);
     long double before = ts.tv_nsec;
     mergeInsertionSort(vector, 0, vector.size() - 1, 2);
-    clock_gettime(CLOCK_REALTIME, &ts); 
-    std::cout << "Vector time: " << ts.tv_nsec - before << std::endl;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    std::cout << "Vector time: " << ts.tv_nsec - before << " ns"<< std::endl;
     clock_gettime(CLOCK_REALTIME, &ts);
     before = ts.tv_nsec;
     mergeInsertionSort(deque, 0, deque.size() - 1, 2);
-    clock_gettime(CLOCK_REALTIME, &ts); 
-    std::cout << "Deque time: " << ts.tv_nsec - before << std::endl;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    std::cout << "Deque time: " << ts.tv_nsec - before << " ns"<< std::endl;
     std::cout << "array after sorting: ";
-    for (std::vector<int>::size_type i = 0; i < vector.size(); ++i)
+    for (std::vector<int>::size_type i = 0; i < 5; ++i)
         std::cout << deque[i] << " ";
+    std::cout << "[..] " << deque[deque.size()];
     std::cout << std::endl;
 
     return 0;

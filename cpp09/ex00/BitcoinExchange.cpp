@@ -49,7 +49,6 @@ void printLine(std::string line, std::map<std::string, float> dataMap)
     number += 13;
     float value = atof(number);
     std::map<std::string, float>::const_iterator it;
-
     for (it = dataMap.begin(); it != dataMap.end(); ++it) {
         std::map<std::string, float>::const_iterator next = it;
         ++next;
