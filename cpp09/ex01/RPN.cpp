@@ -1,24 +1,21 @@
 #include "RPN.hpp"
 
-bool isInteger(std::string token)
+bool isInteger(char token)
 {
-    for (size_t i = 0; i < token.length(); ++i) {
-        if (!isdigit(token[i])) {
-            return false;
-        }
+    if (!isdigit(token)) {
+        return false;
     }
-    int valeur = atoi(token.c_str());
-    return (valeur < 10);
+    return (true);
 }
-double calculate(std::stack<double> operands, std::stack<char> operators)
+int calculate(std::stack<int> operands, std::stack<char> operators)
 {
     if (operators.size() + 1 != operands.size())
         throw (std::invalid_argument("error: wrong number of digit or operators"));
-    double operand1 = operands.top(); operands.pop();
-    while(!operands.empty())
+    int operand1 = operands.top();
+    while(operands.size() > 1 && operators.size() > 0)
     {
-        double operand2 = operands.top(); operands.pop();
-        std::cout << "OP1: " << operand1 << "OP2: "<< operand2 << std::endl;
+        operands.pop();
+        int operand2 = operands.top();
         if (operators.top() == '+') {
             operand1 = (operand1 + operand2);
         } else if (operators.top() == '-') {
@@ -30,30 +27,27 @@ double calculate(std::stack<double> operands, std::stack<char> operators)
                 throw std::invalid_argument("can't divise by 0.");
             operand1 = (operand1 / operand2);
         }
-        operands.push(operand1);
         operators.pop();
     }
-    return (operands.top());
+    return (operand1);
 }
 
 int evaluateRPN(const std::string& expression) {
     std::istringstream iss(expression);
-    std::stack<double> operands;
+    std::stack<int> operands;
     std::stack<char> operators;
     std::string token;
-
-    while (iss >> token)
+    for (int i = expression.size() - 1; i >= 0; i--)
     {
-        if (isInteger(token))
+        if (expression[i] == ' ')
+            continue;
+        else if (isInteger(expression[i]))
         {
-            char* endptr;
-            double value = strtod(token.c_str(), &endptr);
-            if (*endptr == '\0') {
-                operands.push(value);
-            }
+            int value = expression[i] - '0';
+            operands.push(value);
         }
-        else if (token[0] == '*' || token[0] == '+' || token[0] == '-' || token[0] == '/')
-            operators.push(token[0]);
+        else if (expression[i] == '*' || expression[i] == '+' || expression[i] == '-' || expression[i] == '/')
+            operators.push(expression[i]);
         else
             throw std::invalid_argument("invalid argument.");
     }
