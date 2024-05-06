@@ -48,16 +48,11 @@ void printLine(std::string line, std::map<std::string, float> dataMap)
     const char *number = line.c_str();
     number += 13;
     float value = atof(number);
-    std::map<std::string, float>::const_iterator it;
-    for (it = dataMap.begin(); it != dataMap.end(); ++it) {
-        std::map<std::string, float>::const_iterator next = it;
-        ++next;
-        if (next->first > date)
-        {
-            std::cout << date << " => "<< value << " = " << value * it->second << std::endl;
-            break;
-        }
-    }
+    std::map<std::string, float>::const_iterator next;
+    next = dataMap.upper_bound(date);
+    while (next->first > date)
+        next--;
+    std::cout << date << " => "<< value << " = " << value * next->second << std::endl;
 }
 
 bool checkInputFormat(std::string str) {
